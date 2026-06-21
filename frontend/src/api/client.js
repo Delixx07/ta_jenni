@@ -3,6 +3,12 @@
 
 const TOKEN_KEY = "rcms_token";
 
+// Base URL backend. Saat dev dibiarkan kosong → pakai path relatif "/api/..."
+// yang di-proxy Vite. Di produksi (Vercel) diisi via VITE_API_BASE_URL ke URL
+// backend (mis. https://rcms-backend.up.railway.app).
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
+const url = (path) => `${API_BASE}${path}`;
+
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY);
 }
@@ -30,7 +36,7 @@ async function request(path, { method = "GET", body, form, multipart } = {}) {
     headers["Content-Type"] = "application/json";
   }
 
-  const res = await fetch(path, { method, headers, body: payload });
+  const res = await fetch(url(path), { method, headers, body: payload });
   if (!res.ok) {
     // Token kedaluwarsa/invalid: bersihkan sesi & beri tahu app untuk logout.
     // Kecualikan endpoint login agar pesan "email/password salah" tetap tampil.
@@ -124,7 +130,7 @@ async function downloadFile(path) {
   const headers = {};
   const token = getToken();
   if (token) headers["Authorization"] = `Bearer ${token}`;
-  const res = await fetch(path, { headers });
+  const res = await fetch(url(path), { headers });
   if (!res.ok) throw new Error(`Gagal mengunduh (${res.status})`);
 
   const blob = await res.blob();
