@@ -1,0 +1,20 @@
+# ── Python / backend ───────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.env
+.env
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ── Node / frontend ────────────────────────────────────────
+node_modules/
+dist/
+.vite/
+
+# ── Editor / OS ────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
