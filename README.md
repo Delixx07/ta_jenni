@@ -219,5 +219,4 @@ Arsitektur deploy (monorepo, dua layanan):
   (`https://<backend>/api/calendar/oauth/callback`) di Google Cloud Console bila
   mengaktifkan mode asli — lihat [PANDUAN_INTEGRASI_FASE5.md](PANDUAN_INTEGRASI_FASE5.md).
 - Variabel rahasia selalu di-set lewat dashboard platform, jangan di-commit.
-#   t a _ j e n n i  
- 
+# ta_jenni
